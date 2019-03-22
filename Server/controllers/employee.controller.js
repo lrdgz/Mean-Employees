@@ -15,7 +15,13 @@ employeeCrtl.getEmployee = async (req, res) => {
 
 //ADD EMPLOYEEE
 employeeCrtl.createEmployees = async (req, res) => {
-    const employee = new Model(req.body);
+    const employee = new Model({
+        name: req.body.name,
+        position: req.body.position,
+        office: req.body.office,
+        salary: req.body.salary,
+    });
+
     await employee.save();
     res.json({ status: 'Employee Saved' });
 };
@@ -24,10 +30,10 @@ employeeCrtl.createEmployees = async (req, res) => {
 employeeCrtl.updateEmployees = async (req, res) => {
     const { id } = req.params;
     const employee = {
-        name: req.params.name,
-        position: req.params.position,
-        office: req.params.office,
-        salary: req.params.salary,
+        name: req.body.name,
+        position: req.body.position,
+        office: req.body.office,
+        salary: req.body.salary,
     };
 
     await Model.findByIdAndUpdate(id, { $set: employee }, { new: true });

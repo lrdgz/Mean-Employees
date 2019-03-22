@@ -59,6 +59,15 @@ export class EmployeesComponent implements OnInit {
     this.employeeService.selectedEmployee = employee;
   }
 
+  deleteEmployee(employee: string) {
+    this.employeeService.deleteEmployee(employee)
+      .subscribe(res => {
+        console.log(res);
+        M.toast({ html: "Deleted Successfuly!" });
+        this.getEmployees();
+      });
+  }
+
   //RESET FORM
   resetForm(form?: NgForm) {
     if (form) {
